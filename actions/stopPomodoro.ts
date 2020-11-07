@@ -13,5 +13,5 @@ export default async (data: LuxaforType) => {
     "actionFields": {
       color: color
     }
-  }).then((data) => console.log(data.data))
+  })
 }
