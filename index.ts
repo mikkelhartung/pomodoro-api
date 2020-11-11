@@ -3,6 +3,9 @@ import { PrismaClient, User } from '@prisma/client'
 import startPomodoro from './actions/startPomodoro';
 import stopPomodoro from './actions/stopPomodoro';
 import pausePomodoro from './actions/pausePomodoro';
+import dotenv from "dotenv";
+dotenv.config();
+
 const prisma = new PrismaClient()
 
 // Initialize PubSub subscription
@@ -71,15 +74,15 @@ const resolvers = {
       })
 
       if(args.input.status === 'STARTED') {
-        await startPomodoro({ userId: newPomodoro.webhookID})
+        await startPomodoro()
       }
 
       if(args.input.status === 'STOPPED') {
-        await stopPomodoro({ userId: newPomodoro.webhookID})
+        await stopPomodoro()
       }
 
       if(args.input.status === 'PAUSE') {
-        await pausePomodoro({ userId: newPomodoro.webhookID})
+        await pausePomodoro()
       }
 
         pubsub.publish(POMODORO_STARTED, { pomodoroStarted: newPomodoro });
